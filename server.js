@@ -22,11 +22,12 @@ function isCutoffPassed() {
 app.get('/api/departments', async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT department_name FROM departments ORDER BY department_name ASC');
+        // Ensure we always return an array of strings
         const departments = rows.map(row => row.department_name);
         res.json(departments);
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Failed to fetch departments.' });
+        console.error("Database query error on /api/departments:", err.message);
+        res.status(500).json([]);
     }
 });
 
