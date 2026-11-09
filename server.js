@@ -8,6 +8,10 @@ app.use(express.json());
 app.use(express.static(__dirname));
 
 const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+    console.log(`Backend server running on port ${PORT}`);
+});
 
 // Helper function to check 9:30 AM cutoff
 function isCutoffPassed() {
